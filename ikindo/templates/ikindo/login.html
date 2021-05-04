@@ -4,7 +4,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     {% for message in messages %}
-        <p style="color:red">{{ message }}</p>>
+       <p> <label id=invalidInput style="color:red">{{ message }}</label></p>
     {% endfor %}
     <button type="submit" name="login_button">Login</button>
 </form>
