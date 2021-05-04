@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 # Create your views here.
 
 
@@ -27,7 +28,10 @@ def loginPage(request):
                 login(request, user)
                 return HttpResponseRedirect('/adminpage/')
             else:
-                return render(request, 'ikindo/login.html', {'form': form})
+                return HttpResponseRedirect('/login/')
+        else:
+            messages.error(request, 'Input was invalid!')
+            return HttpResponseRedirect('/login/')
 
 
 def logoutAction(request):
