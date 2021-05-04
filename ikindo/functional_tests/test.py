@@ -28,3 +28,13 @@ class TestProject(StaticLiveServerTestCase):
         password.send_keys("test")
         button.click()
         self.assertEquals(self.browser.current_url, self.live_server_url + "/adminpage/")
+
+    def test_login_check_wrong_login(self):
+        self.browser.get(self.live_server_url + "/login")
+        username = self.browser.find_element_by_name("test")
+        password = self.browser.find_element_by_name("test")
+        button = self.browser.find_element_by_name("login_button")
+        username.send_keys("testUser")
+        password.send_keys("test")
+        button.click()
+        # check for the right behaviour
