@@ -5,8 +5,8 @@ from . import returnhtml
 
 
 def index(request):
-    htmlcode = returnhtml.html_convert('testsite/templates/testsite/index.html')
-    csscode = returnhtml.html_convert('testsite/static/testsite/style.css')
+    htmlcode = returnhtml.html_convert('templates/testsite/index.html')
+    csscode = returnhtml.html_convert('static/testsite/style.css')
     print("Resp1: \n" + htmlcode)
 #    htmlcode = htmlcode.strip()
 #   resp2 = "\nTesttext, ich will nur etwas testen \nHallo test"
