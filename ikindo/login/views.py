@@ -12,27 +12,32 @@ def loginPage(request):
     if request.user.is_authenticated:
         return redirect('adminpage')
     if request.method == 'GET':
-        form = AuthenticationForm()
-        if not User.objects.filter(username='testUser').exists():
-            User.objects.create_user('testUser', 'test@user.de', 'test')
-        return render(request, 'ikindo/login.html', {'form': form})
+        return loginPage_Get(request)
     if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        print("test")
-        if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
+        return loginPage_Post
 
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('/adminpage/')
-            else:
-                return HttpResponseRedirect('/login/')
+def loginPage_Get(request):
+    form = AuthenticationForm()
+    if not User.objects.filter(username='testUser').exists():
+        User.objects.create_user('testUser', 'test@user.de', 'test')
+    return render(request, 'ikindo/login.html', {'form': form})
+
+def loginPage_Post(request):
+    form = AuthenticationForm(request=request, data=request.POST)
+    print("test")
+    if form.is_valid():
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/adminpage/')
         else:
-            messages.error(request, 'Input was invalid!')
             return HttpResponseRedirect('/login/')
-
+    else:
+        messages.error(request, 'Input was invalid!')
+        return HttpResponseRedirect('/login/')
 
 def logoutAction(request):
     print("test")
