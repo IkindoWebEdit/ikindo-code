@@ -14,7 +14,7 @@ def loginPage(request):
     if request.method == 'GET':
         return loginPage_Get(request)
     if request.method == 'POST':
-        return loginPage_Post
+        return loginPage_Post(request)
 
 def loginPage_Get(request):
     form = AuthenticationForm()
