@@ -1,7 +1,10 @@
 from django.urls import path
 
-from adminpage import views
+from visualeditor import views
 
 urlpatterns = [
-    path('', views.adminPage, name="adminpage")
+    path('index/', views.index),
+    path('biography/', views.biography),
+    path('hoerbeispiele/', views.hoerbeispiele),
+    path('repertoire/', views.repertoire)
 ]

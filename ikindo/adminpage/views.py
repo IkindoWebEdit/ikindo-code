@@ -4,5 +4,4 @@ from django.shortcuts import render
 
 
 def adminPage(request):
-    context = {}
-    return render(request, 'ikindo/adminpage.html', context)
+    return render(request, 'adminpage.html')

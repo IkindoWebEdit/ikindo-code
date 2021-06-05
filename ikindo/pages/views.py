@@ -1,10 +1,8 @@
 from django.shortcuts import render
 
-BASE_FILE = "base/editor_base.html"
-from pages import templates
+BASE_FILE = "base/base.html"
 
 # Create your views here.
-
 
 def index(request):
     return render(request, 'ikindo/index.html', {'base': BASE_FILE})
@@ -17,4 +15,3 @@ def hoerbeispiele(request):
 
 def repertoire(request):
     return render(request, 'ikindo/repertoire.html', {'base': BASE_FILE})
-
