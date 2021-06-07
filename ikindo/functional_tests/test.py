@@ -19,6 +19,7 @@ class TestProject(StaticLiveServerTestCase):
         self.assertEquals(username.text, '')
         self.assertEquals(password.text, '')
 
+    # test checks behaviour for right login input
     def test_login_check_default_login(self):
         self.browser.get(self.live_server_url + "/login")
         username = self.browser.find_element_by_name("username")
@@ -29,12 +30,19 @@ class TestProject(StaticLiveServerTestCase):
         button.click()
         self.assertEquals(self.browser.current_url, self.live_server_url + "/adminpage/")
 
+    # test checks behaviour for wrong login input
     def test_login_check_wrong_login(self):
         self.browser.get(self.live_server_url + "/login")
-        username = self.browser.find_element_by_name("test")
-        password = self.browser.find_element_by_name("test")
+        username = self.browser.find_element_by_name("username")
+        password = self.browser.find_element_by_name("password")
         button = self.browser.find_element_by_name("login_button")
-        username.send_keys("testUser")
+        username.send_keys("test")
         password.send_keys("test")
         button.click()
-        # check for the right behaviour
+        time.sleep(1)
+        para = self.browser.find_element_by_id("invalidInput")
+        username = self.browser.find_element_by_name("username")
+        password = self.browser.find_element_by_name("password")
+        self.assertEquals(username.text, '')
+        self.assertEquals(password.text, '')
+        self.assertEquals(para.text, 'Input was invalid!')
