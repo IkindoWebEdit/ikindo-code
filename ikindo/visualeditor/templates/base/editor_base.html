@@ -10,7 +10,27 @@
   integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
 <script src="https://use.fontawesome.com/aac5c45839.js"></script>
+ <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Element Selection</h4>
+          </div>
+          <div class="modal-body">
+            <button id="addsection" class="popupbtn" data-dismiss="modal">New Section</button>
+            <button class="popupbtn" data-dismiss="modal">New Point</button>
+          </div>
+          <div class="modal-footer ignore">
+            <button type="button" id="modalclose" class="btn btn-default ignore" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
 {% block content %}{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HTMLEditor</title>
+        <link rel="stylesheet" href="{% static 'htmleditor/style.css' %}">
+    </head>
+    <body>
+        <div>
+            <form action="/htmleditor/external" method="post">
+                {% csrf_token %}
+                <div class="TArea">
+                    <h1>Html-Code</h1>
+                    <textarea name="htmlcode" required>{{editablehtml}}</textarea>
+                </div>
+                <div class="TArea">
+                    <h1>CSS-Code</h1>
+                    <textarea name="csscode" required>{{editablecss}}</textarea>
+                </div>
+                <input type="submit" value="Execute External Python Script">
+            </form>
+        </div>
+    </body>
+</html>
