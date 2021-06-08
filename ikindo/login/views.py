@@ -15,7 +15,7 @@ def loginPage(request):
         form = AuthenticationForm()
         if not User.objects.filter(username='testUser').exists():
             User.objects.create_user('testUser', 'test@user.de', 'test')
-        return render(request, 'ikindo/login.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         print("test")
@@ -32,7 +32,6 @@ def loginPage(request):
         else:
             messages.error(request, 'Input was invalid!')
             return HttpResponseRedirect('/login/')
-
 
 def logoutAction(request):
     print("test")
