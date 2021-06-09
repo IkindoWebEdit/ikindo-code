@@ -73,6 +73,7 @@ document.addEventListener('contextmenu', e => {
   mouseOverElement.style = oldStyle;
   if (mouseOverElement != null) {
     e.preventDefault();
+    disableaddbtn = 1;
     insertEditorTextBox(mouseOverElement);
   }
 });
@@ -113,6 +114,7 @@ function closeEditWindow() {
   tempValue = TextField.document.getElementsByTagName('body')[0].innerHTML;
   tempValue = tempValue.replace("<div>","<br>");
   tempValue = tempValue.replace("</div>"," ");
+  disableaddbtn = 0;
   console.log(tempValue);
   oldElement.innerHTML = TextField.document.getElementsByTagName('body')[0].innerHTML;
   newdiv.replaceWith(oldElement);
@@ -140,20 +142,50 @@ document.getElementById("modalclose").onclick = function(){
   disableaddbtn = 0;
 }
 
-document.getElementById("addsection").onclick = function(){
-    if (parentEl.nodeName == "DL"){
+document.getElementById("addtablesection").onclick = function(){
+    if (parentEl.className == "section"){
       prevDL = parentEl;
+
       // console.log("OP1");
     } else{
       console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
-      var prevDL = getClosest(parentEl, 'dl')
+      var prevDL = getClosest(parentEl, '.section')
       // console.log(prevDL.nodeName)
       // console.log("OP2");
     }
     createSection(prevDL);
 }
 
+document.getElementById("addparagraphsection").onclick = function(){
+  if (parentEl.className == "section"){
+      prevDL = parentEl;
+
+      // console.log("OP1");
+    } else{
+      console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
+      var prevDL = getClosest(parentEl, '.section')
+      // console.log(prevDL.nodeName)
+      // console.log("OP2");
+    }
+  createParagraphSection(prevDL);
+}
+
+document.getElementById("addparagraph").onclick = function(){
+  createParagraph();
+}
+function createParagraphSection(elbefore){
+  var div = document.createElement("div");
+  div.className = "section"
+  elbefore.parentNode.insertBefore(div, elbefore.nextSibling)
+  var paragraph = document.createElement("p");
+  paragraph.className = "col-sm-9";
+  paragraph.textContent="fillyourtexthere";
+  div.appendChild(paragraph);
+}
+
 function createSection(elbefore) {
+  var div = document.createElement("div");
+  div.className = "section"
   var head = document.createElement("h1");
   head.className = "display-6 pb-2"
   head.textContent = "Testgebiet";
@@ -166,10 +198,18 @@ function createSection(elbefore) {
   var names = document.createElement("dd");
   names.className = "col-sm-9";
   names.textContent = "Testname";
-  elbefore.parentNode.insertBefore(head, elbefore.nextSibling)
-  head.parentNode.insertBefore(list, head.nextSibling)
+  elbefore.parentNode.insertBefore(div, elbefore.nextSibling)
+  div.appendChild(head);
+  head.parentNode.insertBefore(list, head.nextSibling);
   list.appendChild(artist);
   list.appendChild(names);
+}
+
+function createParagraph() {
+  var paragraph = document.createElement("p");
+  paragraph.className = "col-sm-9";
+  paragraph.textContent="fill";
+  parentEl.parentNode.insertBefore(paragraph, parentEl.nextSibling);
 }
 
  var getClosest = function (elem, selector) {
@@ -188,8 +228,14 @@ function addbtn(e){
           oldBtn.remove();
         }
         var className = $(e.target).attr('class');
-        var btn = createbtn();
+        //console.log(e.target.nodeName);
         parentEl = e.target;
+        var btn = createbtn();
+
+        if (parentEl){
+                  // console.log(parentEl.nodeName);
+        }
+
         e.target.appendChild(btn);
         oldBtn = btn;
   }
