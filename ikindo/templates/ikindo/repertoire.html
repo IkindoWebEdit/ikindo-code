@@ -6,25 +6,31 @@
 <body>
   <div class="container">
     <div class="section">
-      <h1 class="display-3">Musiktheater</h1>
+      <h1 class="display-3 text-center mb-4 mt-5">Repertoire</h1>
     </div>
-    <div class="section">
-      <h2 class="display-6 pb-2">Opern</h2>
-      <dl class="row">
-        <dt class="col-sm-3">Henry Purcell:</dt>
-        <dd class="col-sm-9">
-          <p>Dido and Aeneas</p>
-          <p>The fairy Queen</p>
-        </dd>
-        <dt class="col-sm-3">Georg Friedrich Händel:</dt>
-        <dd class="col-sm-9">
-          <p>Rinaldo</p>
-          <p>Alexander's Feast</p>
-        </dd>
-      </dl>
+    <div class="row">
+      <div class="col">
+        <h2 class="display-6 pb-2">Opern</h2>
+        <dl class="row">
+          <dt class="col-sm-3">Henry Purcell:</dt>
+          <dd class="col-sm-9">
+           <p>Dido and Aeneas</p>
+           <p>The fairy Queen</p>
+          </dd>
+          <dt class="col-sm-3">Georg Friedrich Händel:</dt>
+          <dd class="col-sm-9">
+            <p>Rinaldo</p>
+            <p>Alexander's Feast</p>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-sm-4">
+        <img src="{% static 'img/GuidoROAW.jpeg'%}" alt="Guido Mancusi" class="img-fluid rounded">
+      </div>
     </div>
-    <div class="section">
-      <h2 class="display-6 pb-2">Operetten</h2>
+    <div class="row">
+      <div class="col">
+        <h2 class="display-6 pb-2 mt-4">Operetten</h2>
       <dl class="row">
         <dt class="col-sm-3">Johann Sebastian Strauss:</dt>
         <dd class="col-sm-9">
@@ -40,9 +46,13 @@
           <p>Der Graph von Luxemburg</p>
         </dd>
       </dl>
+      </div>
+      <div class="col-sm-4"></div>
+
     </div>
-    <div class="section">
-      <h2 class="display-6 pb-2">Musicals</h2>
+    <div class="row mb-5">
+      <div class="col">
+        <h2 class="display-6 pb-2">Musicals</h2>
       <dl class="row">
         <dt class="col-sm-3">Frederick Loewe:</dt>
         <dd class="col-sm-9">
@@ -57,13 +67,13 @@
           <p>Die Schöne und das Biest</p>
         </dd>
       </dl>
+      </div>
+      <div class="col-sm-4">
+        <img src="{% static 'img/GuidoCareful.jpeg' %}" alt="" class="img-fluid rounded">
+      </div>
+
     </div>
-    <div class="section">
-      <h2 class="display-6">Ballette</h2>
-    </div>
-    <div class="section">
-      <h2 class="display-6">Konzerte + Kirchenmusik</h2>
-    </div>
+
 
 
   </div>
