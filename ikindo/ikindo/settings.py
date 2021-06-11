@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages',
+    'htmleditor',
     'login',
     'adminpage',
     'visualeditor',
