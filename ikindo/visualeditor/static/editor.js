@@ -66,6 +66,9 @@ document.addEventListener("mouseout", e => {
 });
 
 document.addEventListener('contextmenu', e => {
+  if (typeof(oldBtn) != 'undefined' && oldBtn != null){
+    oldBtn.remove();
+  }
   mouseOverElement = e.target;
   if (typeof TextField !== 'undefined') {
     closeEditWindow();
