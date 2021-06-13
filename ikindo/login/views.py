@@ -9,6 +9,7 @@ from django.contrib import messages
 
 
 def loginPage(request):
+    nexturl = request.GET.get('next')
     if request.user.is_authenticated:
         return redirect('adminpage')
     if request.method == 'GET':
@@ -26,14 +27,16 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/adminpage/')
+                if nexturl:
+                    return HttpResponseRedirect(nexturl)
+                else:
+                    return HttpResponseRedirect('/adminpage/')
             else:
-                return HttpResponseRedirect('/login/')
+                return HttpResponseRedirect(request.get_full_path())
         else:
             messages.error(request, 'Input was invalid!')
-            return HttpResponseRedirect('/login/')
+            return HttpResponseRedirect(request.get_full_path())
 
 def logoutAction(request):
-    print("test")
     logout(request)
     return HttpResponseRedirect('/login/')

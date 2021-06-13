@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages',
+    'htmleditor',
     'login',
     'adminpage',
     'visualeditor',
@@ -126,3 +127,5 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/login/'
