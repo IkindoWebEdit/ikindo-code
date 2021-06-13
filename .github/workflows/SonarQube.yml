@@ -27,4 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: SonarQube CI
-        run: echo $PWD
+        run: |
+        cd ./ikindo/
+        cmd //C sonar-scan.bat
+
