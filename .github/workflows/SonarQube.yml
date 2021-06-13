@@ -27,7 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: SonarQube CI
-        run: |
-        cd ./ikindo/
-        cmd //C sonar-scan.bat
+        run: cd ./ikindo/
+        run: cmd //C sonar-scan.bat
 
