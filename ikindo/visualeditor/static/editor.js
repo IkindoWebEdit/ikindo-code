@@ -68,7 +68,11 @@ document.addEventListener('contextmenu', e => {
   if (typeof(oldBtn) != 'undefined' && oldBtn != null){
     oldBtn.remove();
   }
-  mouseOverElement = e.target;
+  let mouseOverElement = e.target;
+  if ($(mouseOverElement).hasClass("addedBtn")){
+    e.preventDefault();
+    return;
+  }
   if (typeof TextField !== 'undefined') {
     closeEditWindow();
   }
@@ -151,13 +155,14 @@ document.getElementById("modalclose").onclick = function(){
 }
 
 document.getElementById("addtablesection").onclick = function(){
-    if (parentEl.className == "section"){
+  let prevDL;
+    if (parentEl.className === "section"){
       prevDL = parentEl;
 
       // console.log("OP1");
     } else{
-      console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
-      var prevDL = getClosest(parentEl, '.section')
+      //console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
+      prevDL = getClosest(parentEl, '.section')
       // console.log(prevDL.nodeName)
       // console.log("OP2");
     }
@@ -165,22 +170,22 @@ document.getElementById("addtablesection").onclick = function(){
 }
 
 document.getElementById("addparagraphsection").onclick = function(){
-  if (parentEl.className == "section"){
+  let prevDL;
+  if (parentEl.className === "section"){
       prevDL = parentEl;
-
-      // console.log("OP1");
     } else{
-      console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
-      var prevDL = getClosest(parentEl, '.section')
-      // console.log(prevDL.nodeName)
-      // console.log("OP2");
+      //console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
+      prevDL = getClosest(parentEl, '.section');
+      console.log(prevDL.nodeName);
     }
+  //console.log("prevDL nodeName: " + prevDL.nodeName);
   createParagraphSection(prevDL);
 }
 
 document.getElementById("addparagraph").onclick = function(){
   createParagraph();
 }
+
 function createParagraphSection(elbefore){
   var div = document.createElement("div");
   div.className = "section"
@@ -214,14 +219,16 @@ function createSection(elbefore) {
 }
 
 function createParagraph() {
-  var paragraph = document.createElement("p");
+  let paragraph = document.createElement("p");
   paragraph.className = "col-sm-9";
   paragraph.textContent="fill";
   parentEl.parentNode.insertBefore(paragraph, parentEl.nextSibling);
 }
 
- var getClosest = function (elem, selector) {
+ let getClosest = function (elem, selector) {
+  //console.log("elemname:" + elem.nodeName)
     for ( ; elem && elem !== document; elem = elem.parentNode ) {
+      //console.log("iteration:" + elem.nodeName);
       if ( elem.matches( selector ) ) return elem;
     }
     return null;
@@ -232,20 +239,19 @@ function addbtn(e){
   //   if (!$(e.target).hasClass('addedBtn')) {
   //     if (!$(e.target).hasClass('popupbtn') && !$(e.target).hasClass('popup')) {
   if(disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')){
-            if (oldBtn != null) {
-          oldBtn.remove();
-        }
-        var className = $(e.target).attr('class');
-        //console.log(e.target.nodeName);
-        parentEl = e.target;
-        var btn = createbtn();
-
-        if (parentEl){
-                  // console.log(parentEl.nodeName);
-        }
-
-        e.target.appendChild(btn);
-        oldBtn = btn;
+      if (oldBtn != null) {
+        oldBtn.remove();
+      }
+      let className = $(e.target).attr('class');
+      //console.log(e.target.nodeName);
+      parentEl = e.target;
+      //console.log(parentEl.nodeName);
+      let btn = createbtn();
+      if (parentEl){
+                // console.log(parentEl.nodeName);
+      }
+      e.target.appendChild(btn);
+      oldBtn = btn;
   }
       // }
     // }
@@ -258,7 +264,7 @@ $('#myModal').on("hide.bs.modal", function() {
 })
 
 function createbtn(){
-  var btn = document.createElement("BUTTON");
+  let btn = document.createElement("BUTTON");
   btn.innerHTML = "+";
   btn.type = "button"
   btn.style.fontSize = "10px";
