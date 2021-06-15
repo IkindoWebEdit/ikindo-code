@@ -197,18 +197,18 @@ function createParagraphSection(elbefore){
 }
 
 function createSection(elbefore) {
-  var div = document.createElement("div");
+  let div = document.createElement("div");
   div.className = "section"
-  var head = document.createElement("h1");
+  let head = document.createElement("h1");
   head.className = "display-6 pb-2"
   head.textContent = "Testgebiet";
-  var list = document.createElement("dl");
+  let list = document.createElement("dl");
   list.className="row";
   //list.textContent = "testliste";
-  var artist = document.createElement("dt");
+  let artist = document.createElement("dt");
   artist.className="col-sm-3"
   artist.textContent = "Testartist:";
-  var names = document.createElement("dd");
+  let names = document.createElement("dd");
   names.className = "col-sm-9";
   names.textContent = "Testname";
   elbefore.parentNode.insertBefore(div, elbefore.nextSibling)
@@ -226,36 +226,25 @@ function createParagraph() {
 }
 
  let getClosest = function (elem, selector) {
-  //console.log("elemname:" + elem.nodeName)
     for ( ; elem && elem !== document; elem = elem.parentNode ) {
-      //console.log("iteration:" + elem.nodeName);
       if ( elem.matches( selector ) ) return elem;
     }
     return null;
   };
 
 function addbtn(e){
-  // if(!$(modal).hasClass("show") && !$(e.target).hasClass('show') && disableaddbtn === 0) {
-  //   if (!$(e.target).hasClass('addedBtn')) {
-  //     if (!$(e.target).hasClass('popupbtn') && !$(e.target).hasClass('popup')) {
   if(disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')){
       if (oldBtn != null) {
         oldBtn.remove();
       }
       let className = $(e.target).attr('class');
-      //console.log(e.target.nodeName);
       parentEl = e.target;
-      //console.log(parentEl.nodeName);
       let btn = createbtn();
       if (parentEl){
-                // console.log(parentEl.nodeName);
       }
       e.target.appendChild(btn);
       oldBtn = btn;
   }
-      // }
-    // }
-  // }
 }
 
 $('#myModal').on("hide.bs.modal", function() {
