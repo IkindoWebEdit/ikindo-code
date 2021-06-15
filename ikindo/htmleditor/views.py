@@ -21,7 +21,7 @@ def index(request):
 
 
 def testsite(request, page):
-    htmlpage = "templates/testsite/" + page
+    htmlpage = "templates/ikindo/" + page
     htmlcode = returnhtml.html_convert(htmlpage)
     csscode = returnhtml.html_convert('static/testsite/style.css')
     context = {
@@ -44,7 +44,7 @@ def external(request):
     # for i in range (len(inp)):
     #     print("Character: %c = %d" %(inp[i], ord(inp[i])))
 #    inp = inp.replace("\r", "")
-#    inp = inp.replace("\n", "")
+    inp = inp.replace("\n", "")
     print("Test{ \n" + inp)
     context = {
         'success': inp
