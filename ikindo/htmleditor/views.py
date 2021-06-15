@@ -49,7 +49,7 @@ def external(request):
     context = {
         'success': inp
     }
-    filex = open('moritzseite/templates/moritzseite/moritzseite.html', 'w')
+    filex = open('testsite/testsite.html', 'w')
     filex.write(inp)
     return render(request, 'htmleditor/htmleditortemplate.html', context)
 
