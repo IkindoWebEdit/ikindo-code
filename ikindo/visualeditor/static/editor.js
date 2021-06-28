@@ -18,24 +18,15 @@ var toolBoxHTML = "<div><button onclick=\"execCmd('bold');\"><i class=\"fa fa-bo
 var disablehighlight = 0;
 var disableaddbtn = 0;
 var parentEl;
-var oldBtn;
+
+let btndiv;
+let oldBtn;
+let oldBtnr;
 var modal = document.getElementById("myModal");
 
 document.addEventListener("mouseover", e => {
   addbtn(e);
-
   highlight(e);
-  // // highlight the mouseenter target
-  // element = document.getElementById("EditField");
-  // if (element != null) {
-  //   if (element.contains(e.target) || element == e.target) {
-  //     return;
-  //   }
-  // }
-  // oldStyle = e.target.style;
-  // e.target.style.boxShadow = "inset 0px 0px 0px 2px #C22222"
-  // e.target.style.borderRadius = "7px";
-  // // reset the color after a short delay
 }, false);
 
 
@@ -47,32 +38,32 @@ function highlight(e){
       return;
     }
   }
-  if (disablehighlight === 0){
+  if (disablehighlight === 0 && checknotbtns(e.target)){
     oldStyle = e.target.style;
     e.target.style.boxShadow = "inset 0px 0px 0px 2px #C22222"
     e.target.style.borderRadius = "7px";
     // reset the color after a short delay
   }
-
 }
 
 document.addEventListener("mouseout", e => {
   // highlight the mouseenter target
-  if (disablehighlight === 0){
+  if (disablehighlight === 0 && checknotbtns(e.target)){
       e.target.style = oldStyle;
   }
 
 });
 
 document.addEventListener('contextmenu', e => {
-  if (typeof(oldBtn) != 'undefined' && oldBtn != null){
-    oldBtn.remove();
-  }
-  let mouseOverElement = e.target;
   if ($(mouseOverElement).hasClass("addedBtn")){
     e.preventDefault();
     return;
   }
+  if (typeof(oldBtn) != 'undefined' && oldBtn != null){
+    removebtns();
+  }
+  let mouseOverElement = e.target;
+
   if (typeof TextField !== 'undefined') {
     closeEditWindow();
   }
@@ -97,6 +88,14 @@ document.addEventListener("keydown", e => {
   }
 });
 
+function checknotbtns(target){
+  if ($(target).hasClass('addedBtn') || $(target).hasClass('btn-group')) {
+    console.log("buttons!" + target.nodeName)
+    return false;
+  }
+  console.log("not buttons!" + target.nodeName);
+  return true;
+}
 
 function saveDocument() {
   alert("Hallo");
@@ -233,18 +232,29 @@ function createParagraph() {
   };
 
 function addbtn(e){
-  if(disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')){
+  if ($(e.target).hasClass('btn-group')) {
+    console.log("hat");
+  }
+  if(disableaddbtn === 0 && !$(e.target).hasClass('addedBtn') && !$(e.target).hasClass('btn-group')){
       if (oldBtn != null) {
-        oldBtn.remove();
+        removebtns();
       }
       let className = $(e.target).attr('class');
       parentEl = e.target;
-      let btn = createbtn();
+      let newbtndiv = createbtndiv();
       if (parentEl){
+        e.target.appendChild(newbtndiv);
       }
-      e.target.appendChild(btn);
-      oldBtn = btn;
+      else {
+        btndiv.remove();
+      }
   }
+}
+
+function removebtns(){
+  oldBtn.remove();
+  oldBtnr.remove();
+  btndiv.remove();
 }
 
 $('#myModal').on("hide.bs.modal", function() {
@@ -252,22 +262,39 @@ $('#myModal').on("hide.bs.modal", function() {
 	disablehighlight = 0;
 })
 
-function createbtn(){
+function createbtn(name){
   let btn = document.createElement("BUTTON");
-  btn.innerHTML = "+";
+  btn.innerHTML = name;
   btn.type = "button"
   btn.style.fontSize = "10px";
   btn.style.width = "100%";
   btn.style.height = "30px";
   btn.style.bottom = 0;
   btn.className = "addedBtn btn btn-info btn-lg";
+  return btn;
+}
+
+function createbtndiv(){
+  let btn = createbtn("+");
   btn.setAttribute("data-toggle", "modal");
   btn.setAttribute("data-target", "#myModal");
   btn.id="addBtn";
   btn.onclick = function(){
     disablehighlight = 1;
     disableaddbtn = 1;
-    oldBtn.remove();
+    removebtns();
   }
-    return btn;
+  let btn2 = createbtn("x");
+  btn2.id="removeBtn";
+  btn2.onclick = function(){
+    btndiv.parentNode.remove();
+    removebtns();
+  }
+  oldBtn = btn;
+  oldBtnr = btn2;
+  btndiv = document.createElement("DIV");
+  btndiv.className = "btn-group w-100"
+  btndiv.appendChild(btn);
+  btndiv.appendChild(btn2);
+  return btndiv;
 }
