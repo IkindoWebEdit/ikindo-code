@@ -48,9 +48,28 @@ Connect to it using your browser and the url `localhost:8000`.
 
 Get a feel for our website by using the navigation links at the top of the startpage.
 
+Close the Server by pressing `Ctrl + C` in the command line window
+
 ### Using the editor
 
 1. Login using the account that you created earlier at the url `/login/`.
 2. Use the controls on `/adminpage/` and which page you want to edit and whether you want to edit it using the visual editor or using the HTML editor.
 
 Disclaimer: Changes made will not be locally saved(only cached) in the current state of the project, since our database is not yet up and running. We still need information from our client to be able to set up a database.
+
+### Testing
+
+You can run our Selenium UI tests by using the following commands:
+
+1. Install Selenium
+```
+> pip install selenium
+```
+
+2. Install [Chrome](https://www.google.com/chrome/)
+
+4. Run the tests
+```
+> py manage.py test
+```
+5. Watch the show
