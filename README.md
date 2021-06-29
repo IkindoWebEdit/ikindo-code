@@ -34,7 +34,7 @@ Using Windows Command Line or Powershell:
 5. Create a user
 ```
 > py manage.py migrate
-> py manage.py createsuperuser  #Enter a username, email address(does not need to be real) and password when prompted
+> py manage.py createsuperuser  #Enter a username, email address(does not have to be real) and password when prompted
 ```
 
 6. Run the local server
