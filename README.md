@@ -44,7 +44,7 @@ Using Windows Command Line or Powershell:
 
 Congrats, you've (hopefully)successfully run your own local Ikindo WebEdit server!
 
-Connect to it using your browser and the url `localhost:8000`.
+Connect to it using your browser and the url `localhost:8000` or `127.0.0.1:8000`.
 
 Get a feel for our website by using the navigation links at the top of the startpage.
 
