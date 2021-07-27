@@ -21,3 +21,6 @@ def compositions(request):
 
 def news(request):
     return render(request, 'ikindo/news.html', {'base': BASE_FILE})
+
+def shop(request):
+    return render(request, 'ikindo/shop.html', {'base': BASE_FILE})
