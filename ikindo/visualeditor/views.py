@@ -19,7 +19,7 @@ def biography(request):
 
 @login_required
 def hoerbeispiele(request):
-    return render(request, 'ikindo/hoerbeispiele.html', {'base': BASE_FILE})
+    return render(request, 'ikindo/samples.html', {'base': BASE_FILE})
 
 @login_required
 def repertoire(request):
