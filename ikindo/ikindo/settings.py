@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'login',
     'adminpage',
     'visualeditor',
+    'api',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,4 +130,10 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = '/media/'
+
 LOGIN_URL = '/login/'
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+

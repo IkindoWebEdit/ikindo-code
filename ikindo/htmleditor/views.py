@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.http import require_safe
+from django.contrib.auth.decorators import login_required
 
 from . import returnhtml
 
 
+@login_required
 def index(request):
 #     htmlcode = returnhtml.html_convert('templates/testsite/testsite.html')
 #     csscode = returnhtml.html_convert('static/testsite/style.css')
@@ -20,6 +23,7 @@ def index(request):
     return render(request, 'htmleditor/pageselection.html')
 
 
+@login_required
 def testsite(request, page):
     htmlpage = "templates/ikindo/" + page
     htmlcode = returnhtml.html_convert(htmlpage)
@@ -31,6 +35,7 @@ def testsite(request, page):
     return render(request, 'htmleditor/htmleditortemplate.html', context)
 
 
+@login_required
 def editcode(request):
     context = {
         'success': "it worked successfully"
@@ -38,7 +43,7 @@ def editcode(request):
 
     return render(request, 'htmleditor/htmleditortemplate.html', context)
 
-
+@login_required
 def external(request):
     inp = request.POST.get('htmlcode')
     # for i in range (len(inp)):
@@ -54,6 +59,6 @@ def external(request):
     return render(request, 'htmleditor/htmleditortemplate.html', context)
 
 
-
+@login_required
 def about(request):
     return HttpResponse("ja moin")
