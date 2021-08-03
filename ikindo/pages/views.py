@@ -36,3 +36,6 @@ def news(request):
 
 def shop(request):
     return render(request, 'ikindo/shop.html', {'base': BASE_FILE})
+
+def impressum(request):
+    return render(request, 'ikindo/impressum.html', {'base': BASE_FILE})
