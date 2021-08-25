@@ -1,14 +1,4 @@
 
-//document.addEventListener('contextmenu', e => {
-//    var elements = document.querySelectorAll(':focus');
-//    if (elements.length > 0){
-//        e.preventDefault();
-//        elements.forEach(element => {
-//            console.log(element);
-//        });
-//    }
-//  });
-
 var showingSourceCode = false;
 var isInEditMode = true;
 
@@ -23,19 +13,7 @@ var modal = document.getElementById("myModal");
 
 document.addEventListener("mouseover", e => {
   addbtn(e);
-
   highlight(e);
-  // // highlight the mouseenter target
-  // element = document.getElementById("EditField");
-  // if (element != null) {
-  //   if (element.contains(e.target) || element == e.target) {
-  //     return;
-  //   }
-  // }
-  // oldStyle = e.target.style;
-  // e.target.style.boxShadow = "inset 0px 0px 0px 2px #C22222"
-  // e.target.style.borderRadius = "7px";
-  // // reset the color after a short delay
 }, false);
 
 
@@ -158,41 +136,38 @@ document.getElementById("addtablesection").onclick = function(){
   let prevDL;
     if (parentEl.className === "section"){
       prevDL = parentEl;
-
-      // console.log("OP1");
     } else{
-      //console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
       prevDL = getClosest(parentEl, '.section')
-      // console.log(prevDL.nodeName)
-      // console.log("OP2");
     }
     createSection(prevDL);
 }
 
-document.getElementById("addparagraphsection").onclick = function(){
+document.getElementById("addparagraphsection").onclick = function() {
   let prevDL;
-  if (parentEl.className === "section"){
+  if (parentEl.className === "section") {
+    if (parentEl.className === "section") {
       prevDL = parentEl;
-    } else{
+    } else {
       //console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
       prevDL = getClosest(parentEl, '.section');
       console.log(prevDL.nodeName);
     }
-  //console.log("prevDL nodeName: " + prevDL.nodeName);
-  createParagraphSection(prevDL);
+    //console.log("prevDL nodeName: " + prevDL.nodeName);
+    createParagraphSection(prevDL);
+  }
 }
 
-document.getElementById("addparagraph").onclick = function(){
+document.getElementById("addparagraph").onclick = function () {
   createParagraph();
 }
 
-function createParagraphSection(elbefore){
+function createParagraphSection(elbefore) {
   var div = document.createElement("div");
   div.className = "section"
   elbefore.parentNode.insertBefore(div, elbefore.nextSibling)
   var paragraph = document.createElement("p");
   paragraph.className = "col-sm-9";
-  paragraph.textContent="fillyourtexthere";
+  paragraph.textContent = "fillyourtexthere";
   div.appendChild(paragraph);
 }
 
@@ -203,10 +178,10 @@ function createSection(elbefore) {
   head.className = "display-6 pb-2"
   head.textContent = "Testgebiet";
   let list = document.createElement("dl");
-  list.className="row";
+  list.className = "row";
   //list.textContent = "testliste";
   let artist = document.createElement("dt");
-  artist.className="col-sm-3"
+  artist.className = "col-sm-3"
   artist.textContent = "Testartist:";
   let names = document.createElement("dd");
   names.className = "col-sm-9";
@@ -221,38 +196,38 @@ function createSection(elbefore) {
 function createParagraph() {
   let paragraph = document.createElement("p");
   paragraph.className = "col-sm-9";
-  paragraph.textContent="fill";
+  paragraph.textContent = "fill";
   parentEl.parentNode.insertBefore(paragraph, parentEl.nextSibling);
 }
 
- let getClosest = function (elem, selector) {
-    for ( ; elem && elem !== document; elem = elem.parentNode ) {
-      if ( elem.matches( selector ) ) return elem;
-    }
-    return null;
-  };
+let getClosest = function (elem, selector) {
+  for (; elem && elem !== document; elem = elem.parentNode) {
+    if (elem.matches(selector)) return elem;
+  }
+  return null;
+};
 
-function addbtn(e){
-  if(disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')){
-      if (oldBtn != null) {
-        oldBtn.remove();
-      }
-      let className = $(e.target).attr('class');
-      parentEl = e.target;
-      let btn = createbtn();
-      if (parentEl){
-      }
-      e.target.appendChild(btn);
-      oldBtn = btn;
+function addbtn(e) {
+  if (disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')) {
+    if (oldBtn != null) {
+      oldBtn.remove();
+    }
+    let className = $(e.target).attr('class');
+    parentEl = e.target;
+    let btn = createbtn();
+    if (parentEl) {
+    }
+    e.target.appendChild(btn);
+    oldBtn = btn;
   }
 }
 
-$('#myModal').on("hide.bs.modal", function() {
-	disableaddbtn = 0;
-	disablehighlight = 0;
+$('#myModal').on("hide.bs.modal", function () {
+  disableaddbtn = 0;
+  disablehighlight = 0;
 })
 
-function createbtn(){
+function createbtn() {
   let btn = document.createElement("BUTTON");
   btn.innerHTML = "+";
   btn.type = "button"
@@ -263,56 +238,56 @@ function createbtn(){
   btn.className = "addedBtn btn btn-info btn-lg";
   btn.setAttribute("data-toggle", "modal");
   btn.setAttribute("data-target", "#myModal");
-  btn.id="addBtn";
-  btn.onclick = function(){
+  btn.id = "addBtn";
+  btn.onclick = function () {
     disablehighlight = 1;
     disableaddbtn = 1;
     oldBtn.remove();
   }
-    return btn;
+  return btn;
 }
 
 function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
-    return cookieValue;
+  }
+  return cookieValue;
 }
 
 function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  // these HTTP methods do not require CSRF protection
+  return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
 var csrftoken = getCookie('csrftoken');
 $.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        console.log(csrftoken);
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
+  beforeSend: function (xhr, settings) {
+    console.log(csrftoken);
+    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
     }
+  }
 });
 
-$("#createbackup").click(function(){
-let pageContent = document.getElementsByClassName("content")[0].outerHTML;
-let URLSegments = new URL(window.location.href).pathname.split('/');
-let pageTitle = URLSegments.pop() || URLSegments.pop(); // Handle potential trailing slash
-console.log(pageTitle);
-console.log(pageContent);
+$("#createbackup").click(function () {
+  let pageContent = document.getElementsByClassName("content")[0].outerHTML;
+  let URLSegments = new URL(window.location.href).pathname.split('/');
+  let pageTitle = URLSegments.pop() || URLSegments.pop(); // Handle potential trailing slash
+  console.log(pageTitle);
+  console.log(pageContent);
   $.ajax({
     type: "POST",
     url: "/visualeditor/create_backup/",
-    data: 'title=' + pageTitle + '&' +'content=' + pageContent,
+    data: 'title=' + pageTitle + '&' + 'content=' + pageContent,
     dataType: "text",
     success: function (response) {
       //Do something on success
