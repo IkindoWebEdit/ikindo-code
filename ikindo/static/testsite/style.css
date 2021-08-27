@@ -8,9 +8,6 @@ body{
     background-color: #f4f4f4;
     color: #555555;
 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
-    font-weight: normal;
     /* Same as above */
     font: normal 16px Verdana, Geneva, Tahoma, sans-serif;
 
@@ -62,14 +59,12 @@ a:active{
     border-width: 6px;
     border-style: dotted;
 
-    border: 5px red solid;
-
     padding: 20px;
     margin: 20px 0;
 }
 
 .box-1 h1{
-    font-family: Tahoma;
+    font-family: Tahoma, serif;
     font-weight: 800;
     font-style: italic;
     text-decoration: underline;

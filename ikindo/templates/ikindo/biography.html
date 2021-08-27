@@ -6,43 +6,53 @@
 
 {% block content %}
 <body>
-  <div class="container">
-    <h1 class="display-3 text-center mb-5 mt-5">Bibliographie</h1>
-    <div class="fs-5">
-      Der österr.-italienische Dirigent Guido Mancusi wurde 1966 in Neapel geboren. Aus einem musischen Haushalt
-      stammend erhielt er ersten Klavierunterricht durch Nino Rota. Nach dem Tod des Vaters zog die Familie nach Wien.
-      Mancusi wurde dort Sopransolist der Wiener Sängerknaben, besuchte das Wiener Musikgymnasium. Nach der Matura
-      studierte Mancusi Fagott und Gesang am Konservatorium der Stadt Wien sowie Komposition und Dirigieren an der
-      Musikhochschule Wien. Seine Studien beendete er mit Auszeichnung.
-      Seine ersten Engagements als Kapellmeister und Chordirektor ergaben sich am Stadttheater Coburg (BRD), dem Theater
-      an der Wien, dem Raimundtheater und dem Stadttheater St. Pölten.
+  <div class="content">
+    <div class="section">
+      <h1 class="display-3 text-center mb-5 mt-5">Biographie</h1>
+    </div>
+    <div class="section">
+      <div class="fs-5">
+        Der österr.-italienische Dirigent Guido Mancusi wurde 1966 in Neapel geboren. Aus einem musischen Haushalt
+        stammend erhielt er ersten Klavierunterricht durch Nino Rota. Nach dem Tod des Vaters zog die Familie nach Wien.
+        Mancusi wurde dort Sopransolist der Wiener Sängerknaben, besuchte das Wiener Musikgymnasium. Nach der Matura
+        studierte Mancusi Fagott und Gesang am Konservatorium der Stadt Wien sowie Komposition und Dirigieren an der
+        Musikhochschule Wien. Seine Studien beendete er mit Auszeichnung.
+        Seine ersten Engagements als Kapellmeister und Chordirektor ergaben sich am Stadttheater Coburg (BRD), dem Theater
+        an der Wien, dem Raimundtheater und dem Stadttheater St. Pölten.
+      </div>
+    </div>
+    <div class="section">
+      <div class="text-center mt-4 mb-4">
+        <img src="{% static 'img/GuidoDir.jpeg'%}" alt="" class="img-fluid vw-100 rounded">
+      </div>
 
     </div>
-    <div class="text-center mt-4 mb-4">
-      <img src="{% static 'img/EmbNav_GuidoMancusi_a_720x300.jpg'%}" alt="" class="img-fluid">
+    <div class="section">
+      <div class="fs-5">
+
+        Zur Vervollkommnung seiner Dirigenten - Ausbildung wurde er Assistent von Riccardo Muti an der Mailänder Scala,
+        Assistent in Bayreuth und Assistent von Adam Fischer.
+        Als Dirigent gastierte er in Graz und in Kiel, um schließlich in Klagenfurt mit „Madame Butterfly“ den Intendanten
+        Dietmar Pflegerl auf sich aufmerksam zu machen, der den noch jungen Dirigenten zum Chefdirigenten machte, was
+        Mancusi fünf Jahre lang blieb. Dort erweiterte er sein Repertoire und gewann wichtige Erfahrungen in
+        Leitungsarbeit. Seine Erfolge in Klagenfurt ließen Mancusi auch international größere Beachtung zu Teil werden.
+
+
+        In Wien übernahm Mancusi schließlich die Position des Chefdirigenten des „Schönbrunn Fesitival Orchester“ und
+        gründete in dieser Funktion die Kammeroper Schönbrunn.
+        Mit zunehmender Bekanntheit wurde er in den folgenden Jahren stets zu großen Tourneen eingeladen und so dirigierte
+        Mancusi in Moskau, Tel Aviv, Helsinki, Stockholm, Rom, Toronto, in den USA, in Südamerika und schließlich in Japan
+        und Südkorea. In seiner Heimat verpflichtete man ihn beim Klangbogen Wien und den Wiener Festwochen.
+
+      </div>
     </div>
-    <div class="fs-5">
-
-      Zur Vervollkommnung seiner Dirigenten - Ausbildung wurde er Assistent von Riccardo Muti an der Mailänder Scala,
-      Assistent in Bayreuth und Assistent von Adam Fischer.
-      Als Dirigent gastierte er in Graz und in Kiel, um schließlich in Klagenfurt mit „Madame Butterfly“ den Intendanten
-      Dietmar Pflegerl auf sich aufmerksam zu machen, der den noch jungen Dirigenten zum Chefdirigenten machte, was
-      Mancusi fünf Jahre lang blieb. Dort erweiterte er sein Repertoire und gewann wichtige Erfahrungen in
-      Leitungsarbeit. Seine Erfolge in Klagenfurt ließen Mancusi auch international größere Beachtung zu Teil werden.
-
-
-      In Wien übernahm Mancusi schließlich die Position des Chefdirigenten des „Schönbrunn Fesitival Orchester“ und
-      gründete in dieser Funktion die Kammeroper Schönbrunn.
-      Mit zunehmender Bekanntheit wurde er in den folgenden Jahren stets zu großen Tourneen eingeladen und so dirigierte
-      Mancusi in Moskau, Tel Aviv, Helsinki, Stockholm, Rom, Toronto, in den USA, in Südamerika und schließlich in Japan
-      und Südkorea. In seiner Heimat verpflichtete man ihn beim Klangbogen Wien und den Wiener Festwochen.
-
+    <div class="section">
+      <div class="text-center mt-4 mb-4">
+        <img src="{% static 'img/EmbNav_GuidoMancusi_a_720x300.jpg'%}" alt="" class="img-fluid rounded">
+      </div>
     </div>
-    <div class="text-center mt-4 mb-4">
-      <img src="{% static 'img/guido.jpg'%}" alt="" class="img-fluid">
-    </div>
-    <div class="fs-5">
-
+    <div class="section">
+      <div class="fs-5">
       Schließlich kam es zu einem Engagement als ständiger Gastdirigent an der Volksoper Wien, wo er nun seit 2014 zum
       festen und wichtigen Bestandteil des Hauses gehört. 2017 erhielt Mancusi die Berufung als Principal Guest
       Conductor des BDZ Orchesters in Budapest und für 2018 die des Musikalischen Leiters der Seefestspiele Mörbisch.
@@ -54,6 +64,7 @@
       er ihr Anwalt. Ein verwobenes Leben, das keine Schubladen kennt. So will er leben und kann es auch. Komponisten
       und Dirigenten wollen den Menschen etwas geben – das ist ein Ideal und diesem Ideal folgt Mancusi seit über 30
       Jahren.
+    </div>
     </div>
   </div>
 </body>

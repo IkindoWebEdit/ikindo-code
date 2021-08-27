@@ -22,5 +22,6 @@ urlpatterns = [
     path('htmleditor/', include('htmleditor.urls')),
     path('adminpage/', include('adminpage.urls')),
     path('visualeditor/', include('visualeditor.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('testsite/', include('testsite.urls'))
 ]

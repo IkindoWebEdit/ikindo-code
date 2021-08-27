@@ -21,8 +21,9 @@
             <h4 class="modal-title">Element Selection</h4>
           </div>
           <div class="modal-body">
-            <button id="addsection" class="popupbtn" data-dismiss="modal">New Section</button>
-            <button class="popupbtn" data-dismiss="modal">New Point</button>
+            <button id="addtablesection" class="popupbtn" data-dismiss="modal">New Table Section</button>
+            <button id="addparagraphsection" class="popupbtn" data-dismiss="modal">New paragraph section</button>
+            <button id="addparagraph" class="popupbtn" data-dismiss="modal">New paragraph</button>
           </div>
           <div class="modal-footer ignore">
             <button type="button" id="modalclose" class="btn btn-default ignore" data-dismiss="modal">Close</button>
@@ -31,15 +32,15 @@
 
       </div>
     </div>
+<div class="addedBtn"><button class="addedBtn" id="createbackup"/>Create Backup</div>
 {% block content %}{% endblock %}
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
-
+</div>
 <script type="text/javascript" src="{% static 'editor.js'%}"></script>

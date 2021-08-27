@@ -1,0 +1,45 @@
+html{
+    height: 95%;
+    margin: 0;
+    background-color: lightblue;
+}
+body{
+    background-color: lightblue;
+    height: 100%;
+}
+
+h1{
+    margin-left: 10%;
+}
+
+textarea {
+    width: 90%;
+    height: 80%;
+    margin-left: 5%;
+    white-space: pre;
+}
+
+input {
+    border: none;
+    border-radius: 12px;
+    background-color: darkgray;
+    align-self: center;
+}
+div {
+    height: 100%;
+
+}
+form {
+    height: 100%;
+
+}
+
+.blah {
+    display: flex;
+    align-items: center;
+}
+
+.TArea {
+    float:left;
+    width:50%;
+}
