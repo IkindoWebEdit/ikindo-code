@@ -1,0 +1,33 @@
+*,
+*:before,
+*:after {
+    box-sizing:border-box;
+}
+
+.toolbar {
+    margin: auto;
+}
+.tool-list {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+    padding: 0;
+    margin: 1rem;
+    overflow: hidden;
+}
+.tool--btn{
+    display: block;
+    padding: .5rem;
+    font-size: 20px;
+}
+.tool--sel{
+    display: block;
+    padding: .3rem;
+    font-size: 20px;
+}
+
+#output {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin: 1rem;
+    padding: 1rem;
+}

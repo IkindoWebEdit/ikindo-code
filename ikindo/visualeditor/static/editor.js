@@ -4,7 +4,8 @@ var isInEditMode = true;
 
 var oldStyle;
 var oldElement;
-var toolBoxHTML = "<div><button onclick=\"execCmd('bold');\"><i class=\"fa fa-bold\"><\/i><\/button><button onclick=\"execCmd('italic');\"><i class=\"fa fa-italic\"><\/i><\/button><button onclick=\"execCmd('underline');\"><i class=\"fa fa-underline\"><\/i><\/button><button onclick=\"execCmd('strikeThrough');\"><i class=\"fa fa-strikethrough\"><\/i><\/button><button onclick=\"execCmd('justifyRight');\"><i class=\"fa fa-align-right\"><\/i><\/button><button onclick=\"execCmd('justifyCenter');\"><i class=\"fa fa-align-center\"><\/i><\/button><button onclick=\"execCmd('justifyLeft');\"><i class=\"fa fa-align-right\"><\/i><\/button><button onclick=\"execCmd('justifyFull');\"><i class=\"fa fa-align-justify\"><\/i><\/button><button onclick=\"execCmd('cut');\"><i class=\"fa fa-cut\"><\/i><\/button><button onclick=\"execCmd('copy');\"><i class=\"fa fa-copy\"><\/i><\/button><button onclick=\"execCmd('indent');\"><i class=\"fa fa-indent\"><\/i><\/button><button onclick=\"execCmd('outdent');\"><i class=\"fa fa-dedent\"><\/i><\/button><button onclick=\"execCmd('subscript');\"><i class=\"fa fa-subscript\"><\/i><\/button><button onclick=\"execCmd('superscript');\"><i class=\"fa fa-superscript\"><\/i><\/button><button onclick=\"execCmd('undo');\"><i class=\"fa fa-undo\"><\/i><\/button><button onclick=\"execCmd('redo');\"><i class=\"fa fa-repeat\"><\/i><\/button><button onclick=\"execCmd('insertUnorderedList');\"><i class=\"fa fa-list-ul\"><\/i><\/button><button onclick=\"execCmd('insertOrderedList');\"><i class=\"fa fa-list-ol\"><\/i><\/button><button onclick=\"execCmd('insertParagraph');\"><i class=\"fa fa-paragraph\"><\/i><\/button><button onclick=\"execCommandWithArg('createLink', prompt('Enter a URL', 'http:\/\/'));\"><i class=\"fa fa-link\"><\/i><\/button><button onclick=\"execCmd('unlink');\"><i class=\"fa fa-unlink\"><\/i><\/button><button onclick=\"toggleSource();\"><i class=\"fa fa-code\"><\/i><\/button><button onclick=\"closeEditWindow();\"><i class=\"fa fa-times\"></i><\/button><br><select onchange=\"execCommandWithArg('fontName', this.value);\">    <option value=\"Arial\">Arial<\/option>    <option value=\"Comic Sans MS\">Comic Sans MS<\/option>    <option value=\"Courier\">Courier<\/option>    <option value=\"Georgia\">Georgia<\/option>    <option value=\"Tahoma\">Tahoma<\/option>    <option value=\"Times New Roman\">Times New Roman<\/option>    <option value=\"Verdana\">Verdana<\/option><\/select><select onchange=\"execCommandWithArg('fontSize', this.value);\">    <option value=\"1\">1<\/option>    <option value=\"2\">2<\/option>    <option value=\"3\">3<\/option>    <option value=\"4\">4<\/option>    <option value=\"5\">5<\/option>    <option value=\"6\">6<\/option>    <option value=\"7\">7<\/option>   <\/select>    Fore Color: <input type=\"color\" onchange=\"execCommandWithArg('foreColor', this.value);\"\/>    Background: <input type=\"color\" onchange=\"execCommandWithArg('hiliteColor', this.value);\"\/><\/div>";
+var toolBoxHTML = "<div class=\"toolbar\"><ul class=\"tool-list\"><li class=\"tool\">                     <button type=\"button\" data-command='bold' class=\"tool--btn\">                         <i class=\"fas fa-bold \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='italic' class=\"tool--btn\">                         <i class=\"fas fa-italic \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='underline' class=\"tool--btn\">                         <i class=\"fas fa-underline \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='strikeThrough' class=\"tool--btn\">                         <i class=\"fas fa-strikethrough \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='justifyRight' class=\"tool--btn\">                         <i class=\"fas fa-align-right \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='justifyCenter' class=\"tool--btn\">                         <i class=\"fas fa-align-center \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='justifyLeft' class=\"tool--btn\">                         <i class=\"fas fa-align-left \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='justifyFull' class=\"tool--btn\">                         <i class=\"fas fa-align-justify \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='cut' class=\"tool--btn\">                         <i class=\"fas fa-cut \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='copy' class=\"tool--btn\">                         <i class=\"fas fa-copy \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='indent' class=\"tool--btn\">                         <i class=\"fas fa-indent \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='outdent' class=\"tool--btn\">                         <i class=\"fas fa-outdent \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='subscript' class=\"tool--btn\">                         <i class=\"fas fa-subscript \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='superscript' class=\"tool--btn\">                         <i class=\"fas fa-superscript \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='undo' class=\"tool--btn\">                         <i class=\"fas fa-undo \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='redo' class=\"tool--btn\">                         <i class=\"fas fa-redo \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='insertUnorderedList' class=\"tool--btn\">                         <i class=\"fas fa-list-ul \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='insertOrderedList' class=\"tool--btn\">                         <i class=\"fas fa-list-ol \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='insertParagraph' class=\"tool--btn\">                         <i class=\"fas fa-paragraph \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command=\"createlink\" class=\"tool--btn\">                         <i class=\"fas fa-link \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command='unlink' class=\"tool--btn\">                         <i class=\"fas fa-unlink \"></i>                     </button>                 </li>                 <li class=\"tool\">                     <button type=\"button\" data-command=\"toggleSource\" class=\"tool--btn\">                         <i class=\"fas fa-code \"></i>                     </button>                 </li>                                 <li class=\"tool\">                     <select data-command=\"fontName\" class=\"tool--sel\">                         <option value=\"Arial \">Arial</option>                         <option value=\"Comic Sans MS \">Comic Sans MS</option>                         <option value=\"Courier \">Courier</option>                         <option value=\"Georgia \">Georgia</option>                         <option value=\"Tahoma \">Tahoma</option>                         <option value=\"Times New Roman \">Times New Roman</option>                         <option value=\"Verdana \">Verdana</option>                     </select>                 </li>                 <li class=\"tool\">                     <select data-command=\"fontSize\" class=\"tool--sel\">                         <option value=\"1 \">1</option>                         <option value=\"2 \">2</option>                         <option value=\"3 \">3</option>                         <option value=\"4 \">4</option>                         <option value=\"5 \">5</option>                         <option value=\"6 \">6</option>                         <option value=\"7 \">7</option>                     </select>                 </li>      <li class=\"tool\">  <button type=\"button\" data-command=\"closeEditWindow\" class=\"tool--btn\">       <i class=\"fas fa-check \"></i>              </button>          </li>        </ul>         </div>   ";
+var textBoxHTML = " <div contenteditable=\"true\" id=\"output\"></div>";
 var disablehighlight = 0;
 var disableaddbtn = 0;
 var parentEl;
@@ -51,7 +52,8 @@ document.addEventListener('contextmenu', e => {
     e.preventDefault();
     return;
   }
-  if (typeof TextField !== 'undefined') {
+  output = document.getElementById("output");
+  if (output !== null ) {
     closeEditWindow();
   }
   mouseOverElement.style = oldStyle;
@@ -76,20 +78,6 @@ document.addEventListener("keydown", e => {
 });
 
 
-function saveDocument() {
-  alert("Hallo");
-}
-
-function execCmd(command) {
-  TextField.document.execCommand(command, false, null);
-}
-
-function execCommandWithArg(command, arg) {
-  if (arg != null) {
-    TextField.document.execCommand(command, false, arg);
-  }
-}
-
 function toggleSource() {
   if (showingSourceCode) {
     TextField.document.getElementsByTagName('body')[0].innerHTML = TextField.document.getElementsByTagName('body')[0].textContent;
@@ -101,12 +89,9 @@ function toggleSource() {
 }
 
 function closeEditWindow() {
-  tempValue = TextField.document.getElementsByTagName('body')[0].innerHTML;
-  tempValue = tempValue.replace("<div>","<br>");
-  tempValue = tempValue.replace("</div>"," ");
+  var output = document.getElementById("output");
   disableaddbtn = 0;
-  console.log(tempValue);
-  oldElement.innerHTML = TextField.document.getElementsByTagName('body')[0].innerHTML;
+  oldElement.innerHTML = output.innerHTML;
   newdiv.replaceWith(oldElement);
 }
 
@@ -114,16 +99,43 @@ function insertEditorTextBox(element) {
   newdiv = document.createElement("div")
   newdiv.id = "EditField";
   oldElement = element;
-  var textBox = document.createElement("iframe");
+  var textBox = document.createElement("div");
   var toolBox = document.createElement("div");
-  toolBox.style.width = "1200px"
-  textBox.name = "TextField";
   toolBox.innerHTML = toolBoxHTML;
+  textBox.innerHTML = textBoxHTML;
   newdiv.appendChild(toolBox);
   newdiv.appendChild(textBox);
   element.replaceWith(newdiv);
-  TextField.document.designMode = 'On';
-  TextField.document.getElementsByTagName('body')[0].innerHTML = element.innerHTML;
+
+let output = document.getElementById('output');
+let buttons = document.getElementsByClassName('tool--btn');
+let selects = document.getElementsByClassName('tool--sel');
+
+for (let sel of selects) {
+    console.log(sel);
+    sel.addEventListener('change', () => {
+        let cmd = sel.dataset['command'];
+        let val = sel.value ;
+        document.execCommand(cmd, false, val);
+    })
+}
+for (let btn of buttons) {
+    btn.addEventListener('click', () => {
+        let cmd = btn.dataset['command'];
+        if (cmd === 'createlink') {
+            let url = prompt("Enter the link here: ", "http:\/\/");
+            document.execCommand(cmd, false, url);
+        } else if (cmd == 'toggleSource') {
+            toggleSource();
+        } else if (cmd == 'closeEditWindow') {
+            closeEditWindow();
+        } else {
+            document.execCommand(cmd, false, null);
+        }
+    })
+}
+
+output.innerHTML = element.innerHTML;
 }
 
 document.getElementById("modalclose").onclick = function(){
