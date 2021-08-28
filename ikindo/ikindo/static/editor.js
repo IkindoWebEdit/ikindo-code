@@ -271,3 +271,51 @@ function createbtn(){
   }
     return btn;
 }
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+var csrftoken = getCookie('csrftoken');
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        console.log(csrftoken);
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+$("#createbackup").click(function(){
+let pageContent = document.getElementsByClassName("content")[0].outerHTML;
+let URLSegments = new URL(window.location.href).pathname.split('/');
+let pageTitle = URLSegments.pop() || URLSegments.pop(); // Handle potential trailing slash
+console.log(pageTitle);
+console.log(pageContent);
+  $.ajax({
+    type: "POST",
+    url: "/visualeditor/create_backup/",
+    data: 'title=' + pageTitle + '&' +'content=' + pageContent,
+    dataType: "text",
+    success: function (response) {
+      //Do something on success
+    }
+  });
+});

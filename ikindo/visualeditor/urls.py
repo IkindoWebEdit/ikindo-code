@@ -7,5 +7,7 @@ urlpatterns = [
     path('biography/', views.biography),
     path('hoerbeispiele/', views.hoerbeispiele),
     path('repertoire/', views.repertoire),
-    path('create_backup/', views.create_backup)
+    path('create_backup/', views.create_backup),
+    path('compositions/', views.compositions),
+    path('news/', views.news)
 ]
