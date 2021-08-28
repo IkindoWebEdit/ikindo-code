@@ -1,7 +1,7 @@
 
 var showingSourceCode = false;
 var isInEditMode = true;
-
+var oldFrameElement
 var oldStyle;
 var oldElement;
 var toolBoxHTML = "<div><button onclick=\"execCmd('bold');\"><i class=\"fa fa-bold\"><\/i><\/button><button onclick=\"execCmd('italic');\"><i class=\"fa fa-italic\"><\/i><\/button><button onclick=\"execCmd('underline');\"><i class=\"fa fa-underline\"><\/i><\/button><button onclick=\"execCmd('strikeThrough');\"><i class=\"fa fa-strikethrough\"><\/i><\/button><button onclick=\"execCmd('justifyRight');\"><i class=\"fa fa-align-right\"><\/i><\/button><button onclick=\"execCmd('justifyCenter');\"><i class=\"fa fa-align-center\"><\/i><\/button><button onclick=\"execCmd('justifyLeft');\"><i class=\"fa fa-align-right\"><\/i><\/button><button onclick=\"execCmd('justifyFull');\"><i class=\"fa fa-align-justify\"><\/i><\/button><button onclick=\"execCmd('cut');\"><i class=\"fa fa-cut\"><\/i><\/button><button onclick=\"execCmd('copy');\"><i class=\"fa fa-copy\"><\/i><\/button><button onclick=\"execCmd('indent');\"><i class=\"fa fa-indent\"><\/i><\/button><button onclick=\"execCmd('outdent');\"><i class=\"fa fa-dedent\"><\/i><\/button><button onclick=\"execCmd('subscript');\"><i class=\"fa fa-subscript\"><\/i><\/button><button onclick=\"execCmd('superscript');\"><i class=\"fa fa-superscript\"><\/i><\/button><button onclick=\"execCmd('undo');\"><i class=\"fa fa-undo\"><\/i><\/button><button onclick=\"execCmd('redo');\"><i class=\"fa fa-repeat\"><\/i><\/button><button onclick=\"execCmd('insertUnorderedList');\"><i class=\"fa fa-list-ul\"><\/i><\/button><button onclick=\"execCmd('insertOrderedList');\"><i class=\"fa fa-list-ol\"><\/i><\/button><button onclick=\"execCmd('insertParagraph');\"><i class=\"fa fa-paragraph\"><\/i><\/button><button onclick=\"execCommandWithArg('createLink', prompt('Enter a URL', 'http:\/\/'));\"><i class=\"fa fa-link\"><\/i><\/button><button onclick=\"execCmd('unlink');\"><i class=\"fa fa-unlink\"><\/i><\/button><button onclick=\"toggleSource();\"><i class=\"fa fa-code\"><\/i><\/button><button onclick=\"closeEditWindow();\"><i class=\"fa fa-times\"></i><\/button><br><select onchange=\"execCommandWithArg('fontName', this.value);\">    <option value=\"Arial\">Arial<\/option>    <option value=\"Comic Sans MS\">Comic Sans MS<\/option>    <option value=\"Courier\">Courier<\/option>    <option value=\"Georgia\">Georgia<\/option>    <option value=\"Tahoma\">Tahoma<\/option>    <option value=\"Times New Roman\">Times New Roman<\/option>    <option value=\"Verdana\">Verdana<\/option><\/select><select onchange=\"execCommandWithArg('fontSize', this.value);\">    <option value=\"1\">1<\/option>    <option value=\"2\">2<\/option>    <option value=\"3\">3<\/option>    <option value=\"4\">4<\/option>    <option value=\"5\">5<\/option>    <option value=\"6\">6<\/option>    <option value=\"7\">7<\/option>   <\/select>    Fore Color: <input type=\"color\" onchange=\"execCommandWithArg('foreColor', this.value);\"\/>    Background: <input type=\"color\" onchange=\"execCommandWithArg('hiliteColor', this.value);\"\/><\/div>";
@@ -25,9 +25,15 @@ function highlight(e){
       return;
     }
   }
+  console.log(e.target.nodeName)
+  if (e.target.nodeName == "BUTTON" || e.target.nodeName == "BODY" || e.target.nodeName == "HTML"){
+    return;
+  }
+
   if (disablehighlight === 0){
+    oldFrameElement = e.target
     oldStyle = e.target.style;
-    e.target.style.boxShadow = "inset 0px 0px 0px 2px #C22222"
+    e.target.style.boxShadow = "inset 0px 0px 0px 2px #808080"
     e.target.style.borderRadius = "7px";
     // reset the color after a short delay
   }
@@ -36,10 +42,18 @@ function highlight(e){
 
 document.addEventListener("mouseout", e => {
   // highlight the mouseenter target
+
+  if (e.relatedTarget.nodeName == "BUTTON"){
+    return;
+  }
+  //make sure old frame gets deleted
+  if (e.target.nodeName == "BUTTON") {
+    oldFrameElement.style = oldStyle
+    return;
+  }
   if (disablehighlight === 0){
       e.target.style = oldStyle;
   }
-
 });
 
 document.addEventListener('contextmenu', e => {
@@ -74,7 +88,6 @@ document.addEventListener("keydown", e => {
     }
   }
 });
-
 
 function saveDocument() {
   alert("Hallo");
@@ -139,26 +152,41 @@ document.getElementById("addtablesection").onclick = function(){
     } else{
       prevDL = getClosest(parentEl, '.section')
     }
-    createSection(prevDL);
+    createTableSection(prevDL);
 }
 
 document.getElementById("addparagraphsection").onclick = function() {
   let prevDL;
-  if (parentEl.className === "section") {
+  console.log("adddparagraphsection")
     if (parentEl.className === "section") {
+      console.log("Found1")
       prevDL = parentEl;
     } else {
       //console.log("parentEl nodeName: " + parentEl.nodeName+ " classname: " + parentEl.className)
+      console.log("Found2")
       prevDL = getClosest(parentEl, '.section');
       console.log(prevDL.nodeName);
     }
-    //console.log("prevDL nodeName: " + prevDL.nodeName);
+    console.log("prevDL nodeName: " + prevDL.nodeName);
     createParagraphSection(prevDL);
-  }
 }
 
 document.getElementById("addparagraph").onclick = function () {
+  console.log("addparagraph")
   createParagraph();
+}
+
+document.getElementById("addArtist").onclick = function () {
+  console.log("addArtist")
+  let lastDL
+  if (parentEl.NodeName === "DL"){
+    lastDL = e.target
+  }
+  else {
+    lastDL = getClosest(parentEl, "dl")
+  }
+  console.log("Elbefore Nodename: " + lastDL.nodeName)
+  createArtist(lastDL);
 }
 
 function createParagraphSection(elbefore) {
@@ -171,7 +199,7 @@ function createParagraphSection(elbefore) {
   div.appendChild(paragraph);
 }
 
-function createSection(elbefore) {
+function createTableSection(elbefore) {
   let div = document.createElement("div");
   div.className = "section"
   let head = document.createElement("h1");
@@ -179,18 +207,22 @@ function createSection(elbefore) {
   head.textContent = "Testgebiet";
   let list = document.createElement("dl");
   list.className = "row";
-  //list.textContent = "testliste";
-  let artist = document.createElement("dt");
-  artist.className = "col-sm-3"
-  artist.textContent = "Testartist:";
-  let names = document.createElement("dd");
-  names.className = "col-sm-9";
-  names.textContent = "Testname";
   elbefore.parentNode.insertBefore(div, elbefore.nextSibling)
   div.appendChild(head);
   head.parentNode.insertBefore(list, head.nextSibling);
-  list.appendChild(artist);
-  list.appendChild(names);
+  createArtist(list);
+}
+
+function createArtist(elbefore){
+  console.log("CreateArtist")
+  let artist = document.createElement("dt");
+  artist.className = "col-sm-3"
+  artist.textContent = "Neuer Künstler:";
+  let names = document.createElement("dd");
+  names.className = "col-sm-9";
+  names.textContent = "Name";
+  elbefore.appendChild(artist);
+  elbefore.appendChild(names);
 }
 
 function createParagraph() {
@@ -208,6 +240,13 @@ let getClosest = function (elem, selector) {
 };
 
 function addbtn(e) {
+  if (e.target.nodeName == "BODY" || e.target.nodeName == "HTML"){
+    console.log("Body/Html")
+    if (oldBtn != null) {
+      oldBtn.remove();
+    }
+    return;
+  }
   if (disableaddbtn === 0 && !$(e.target).hasClass('addedBtn')) {
     if (oldBtn != null) {
       oldBtn.remove();

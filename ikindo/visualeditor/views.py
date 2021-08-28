@@ -26,6 +26,18 @@ def repertoire(request):
     return render(request, 'ikindo/repertoire.html', {'base': BASE_FILE})
 
 @login_required
+def repertoire(request):
+    return render(request, 'ikindo/repertoire.html', {'base': BASE_FILE})
+
+@login_required
+def compositions(request):
+    return render(request, 'ikindo/compositions.html', {'base': BASE_FILE})
+
+@login_required
+def news(request):
+    return render(request, 'ikindo/news.html', {'base': BASE_FILE})
+
+@login_required
 def create_backup(request):
     pageTitle = request.POST.get("title")
     pageContent = request.POST.get("content")
