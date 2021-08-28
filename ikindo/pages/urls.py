@@ -9,5 +9,6 @@ urlpatterns = [
     path('repertoire/', views.repertoire, name="repertoire"),
     path('compositions/', views.compositions, name="compositions"),
     path('news/', views.news, name="news"),
-    path('shop/', views.shop, name="shop")
+    path('shop/', views.shop, name="shop"),
+    path('impressum/', views.impressum, name="impressum")
 ]
